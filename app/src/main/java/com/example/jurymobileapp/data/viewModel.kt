@@ -20,6 +20,13 @@ class GetDaneViewModel: ViewModel(){
     var kategorie by mutableStateOf<List<Kategoria>>(emptyList())
         private set
 
+    var zalogowanyJuror by mutableStateOf<Juror?>(null)
+        private set
+
+    fun zaloguj(juror: Juror) {
+        zalogowanyJuror = juror
+    }
+
     init{
         fetchJurorzy()
         fetchKategorie()

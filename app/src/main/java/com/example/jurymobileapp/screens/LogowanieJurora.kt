@@ -113,8 +113,13 @@ fun logowanieJurora(navController: NavController, viewModel: GetDaneViewModel)
 
             if(zalogowanyJuror != null){
                 println("✅ Zalogowano: ${zalogowanyJuror.imie} ${zalogowanyJuror.nazwisko}")
+                viewModel.zaloguj(zalogowanyJuror)
                 Toast.makeText(context, "Zalogowano pomyślnie", Toast.LENGTH_SHORT).show()
-                navController.navigate(Screens.WyborKategori.route)
+                navController.navigate(Screens.WyborKategori.route) {
+                    popUpTo(Screens.LogowanieJury.route) {
+                        inclusive = true
+                    }
+                }
             } else {
                 println("❌ Nie znaleziono jurora")
                 Toast.makeText(context, "❌    Złe dane    ❌", Toast.LENGTH_SHORT).show()
