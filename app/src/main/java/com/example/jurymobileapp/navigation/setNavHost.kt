@@ -10,7 +10,6 @@ import androidx.navigation.compose.composable
 import com.example.jurymobileapp.data.GetDaneViewModel
 
 import com.example.jurymobileapp.screens.logowanieJurora
-import com.example.jurymobileapp.screens.ocenaScreen
 import com.example.jurymobileapp.screens.wyborKategorii
 
 @Composable
@@ -29,9 +28,9 @@ fun setNavHosts(navHostController:NavHostController)
             wyborKategorii(navHostController,getDaneViewModel)
         }
 
-        composable(route = Screens.WyborOceny.route)
+        composable(route = Screens.WyborUczestnikow.route)
         {
-            ocenaScreen(navHostController)
+
         }
 
 

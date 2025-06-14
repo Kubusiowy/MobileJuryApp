@@ -40,6 +40,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.draw.shadow
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.jurymobileapp.data.Screens
 import com.example.jurymobileapp.model.Kategoria
 
 @Composable
@@ -61,21 +63,21 @@ fun wyborKategorii(navController: NavController,viewModel: GetDaneViewModel) {
         }
 
 
-        ListaKategori(viewModel)
+        ListaKategori(viewModel,navController)
 
     }
 
 }
 
 @Composable
-fun ListaKategori(viewModel: GetDaneViewModel){
+fun ListaKategori(viewModel: GetDaneViewModel,navController: NavController){
     val kategorie = viewModel.kategorie
 
     LazyColumn(Modifier.fillMaxSize().padding(12.dp)) {
 
         items(kategorie) {kategoria ->
 
-            KategoriaCard(kategoria)
+            KategoriaCard(kategoria,navController,viewModel)
             Spacer(modifier = Modifier.height(16.dp))
 
         }
@@ -85,13 +87,17 @@ fun ListaKategori(viewModel: GetDaneViewModel){
 
 
 @Composable
-fun KategoriaCard(kategoria: Kategoria)
+fun KategoriaCard(kategoria: Kategoria,navController: NavController,viewModel: GetDaneViewModel)
 {
+
+    val juror = viewModel.zalogowanyJuror
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp).clickable{
 
+                navController.navigate(Screens.WyborUczestnikow.passJurorId(juror?.id?: -1))
 
             },
         shape = RoundedCornerShape(12.dp),

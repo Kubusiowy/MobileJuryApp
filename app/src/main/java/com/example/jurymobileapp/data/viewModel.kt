@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.jurymobileapp.api.RetrofitClient
 import com.example.jurymobileapp.model.Juror
 import com.example.jurymobileapp.model.Kategoria
+import com.example.jurymobileapp.model.Uczestnik
 import kotlinx.coroutines.launch
 import kotlin.toString
 
@@ -19,6 +20,8 @@ class GetDaneViewModel: ViewModel(){
 
     var kategorie by mutableStateOf<List<Kategoria>>(emptyList())
         private set
+
+    var uczestnicy by mutableStateOf<List<Uczestnik>>(emptyList())
 
     var zalogowanyJuror by mutableStateOf<Juror?>(null)
         private set
@@ -55,6 +58,21 @@ class GetDaneViewModel: ViewModel(){
             }catch (e: Exception){
                 println("Błąd pobierania kategorii: ${e.message}")
                 Log.d("api","nie udało się pobrać kategorii ${e.message}")
+            }
+        }
+    }
+
+    private fun fetchUczestnicy()
+    {
+        viewModelScope.launch {
+            try {
+                uczestnicy = RetrofitClient.api.getUczestnicy()
+                Log.d("api","udało się pobrac uczestników ${uczestnicy}")
+
+
+            }catch(e: Exception){
+                println("Błąd pobierania uczestnikow: ${e.message}")
+                Log.d("api","nie udało się pobrać uczestnikow ${e.message}")
             }
         }
     }
