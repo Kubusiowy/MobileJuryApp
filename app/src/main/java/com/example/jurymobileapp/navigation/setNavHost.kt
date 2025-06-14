@@ -8,6 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.composable
 import com.example.jurymobileapp.data.GetDaneViewModel
+import com.example.jurymobileapp.data.Screens.WyborUczestnikow
+import com.example.jurymobileapp.screens.Error.ErrorScreen
+import com.example.jurymobileapp.screens.WyborUczestnika
 
 import com.example.jurymobileapp.screens.logowanieJurora
 import com.example.jurymobileapp.screens.wyborKategorii
@@ -29,7 +32,14 @@ fun setNavHosts(navHostController:NavHostController)
         }
 
         composable(route = Screens.WyborUczestnikow.route)
-        {
+        { bse ->
+            val jurorId = bse.arguments?.getString("jurorId")?.toIntOrNull() ?: -1
+            val kategoriaId = bse.arguments?.getString("kategoriaId")?.toIntOrNull() ?: -1
+            if (jurorId == -1|| kategoriaId == -1) {
+                ErrorScreen("Brakuje ID jurora lub kategorii 😵")
+                return@composable
+            }
+            WyborUczestnika(navHostController, getDaneViewModel,jurorId = jurorId, kategoriaId = kategoriaId)
 
         }
 

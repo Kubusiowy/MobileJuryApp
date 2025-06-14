@@ -97,8 +97,9 @@ fun KategoriaCard(kategoria: Kategoria,navController: NavController,viewModel: G
             .fillMaxWidth()
             .padding(8.dp).clickable{
 
-                navController.navigate(Screens.WyborUczestnikow.passJurorId(juror?.id?: -1))
-
+                juror?.let {
+                    navController.navigate(Screens.WyborUczestnikow.passIds(it.id, kategoria.id))
+                }
             },
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(10.dp),

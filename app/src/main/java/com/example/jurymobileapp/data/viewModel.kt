@@ -33,6 +33,7 @@ class GetDaneViewModel: ViewModel(){
     init{
         fetchJurorzy()
         fetchKategorie()
+        fetchUczestnicy()
     }
 
     private fun fetchJurorzy(){
@@ -64,6 +65,7 @@ class GetDaneViewModel: ViewModel(){
 
     private fun fetchUczestnicy()
     {
+
         viewModelScope.launch {
             try {
                 uczestnicy = RetrofitClient.api.getUczestnicy()
