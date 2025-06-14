@@ -1,5 +1,6 @@
 package com.example.jurymobileapp.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,23 +33,28 @@ import androidx.navigation.NavController
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.jurymobileapp.data.GetDaneViewModel
 
+import com.example.jurymobileapp.data.Screens
 
 
 @Composable
-fun logowanieJurora(navController: NavController)
+fun logowanieJurora(navController: NavController, viewModel: GetDaneViewModel)
 {
+    val jurorzy = viewModel.jurorzy
+
     var imie by remember { mutableStateOf("") }
     var nazwisko by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    Column(modifier = Modifier.background(Color.LightGray).fillMaxSize().padding(24.dp),
+    Column(modifier = Modifier.background(Color.White).fillMaxSize().padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
         )
     {
 
-        Text(text = "Logowanie",
+        Text(text = "Logowanie ",
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp,
             color = MaterialTheme.colorScheme.primary
@@ -103,11 +109,16 @@ fun logowanieJurora(navController: NavController)
         Spacer(Modifier.height(25.dp))
 
         Button(onClick = {
+            var zalogowanyJuror= jurorzy.find{ it.imie.equals(imie, ignoreCase = true) && it.nazwisko.equals(nazwisko, ignoreCase = true)}
 
-
-
-
-
+            if(zalogowanyJuror != null){
+                println("✅ Zalogowano: ${zalogowanyJuror.imie} ${zalogowanyJuror.nazwisko}")
+                Toast.makeText(context, "Zalogowano pomyślnie", Toast.LENGTH_SHORT).show()
+                navController.navigate(Screens.WyborKategori.route)
+            } else {
+                println("❌ Nie znaleziono jurora")
+                Toast.makeText(context, "❌    Złe dane    ❌", Toast.LENGTH_SHORT).show()
+            }
 
         }) {
             Text(text = "Zaloguj się")
