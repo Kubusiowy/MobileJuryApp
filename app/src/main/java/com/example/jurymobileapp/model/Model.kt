@@ -17,3 +17,26 @@ data class Kategoria(
     @Json(name = "nazwa") val nazwa:String,
 )
 
+@JsonClass(generateAdapter = true)
+data class Kryterium(
+    @Json(name = "id") val id: Int,
+    @Json(name = "id_kategorii") val idKategorii: Int,
+    @Json(name = "nazwa") val nazwa: String
+)
+
+@JsonClass(generateAdapter = true)
+data class Uczestnik(
+    @Json(name = "id") val id: Int,
+    @Json(name = "imie") val imie: String,
+    @Json(name = "nazwisko") val nazwisko: String
+)
+
+
+@JsonClass(generateAdapter = true)
+data class Ocena(
+    @Json(name = "id") val id: Int,
+    @Json(name = "id_jurora") val idJurora: Int,
+    @Json(name = "id_uczestnika") val idUczestnika: Int,
+    @Json(name = "id_kryterium") val idKryterium: Int,
+    @Json(name = "punkty") val punkty: Int
+)
