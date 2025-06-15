@@ -42,9 +42,12 @@ fun WyborUczestnika(navController: NavController, viewModel: GetDaneViewModel,ju
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,)
         }
+        Column(Modifier.fillMaxSize().padding(top = 0.dp, start = 25.dp, end = 25.dp))
+        {
+            listUczestnicy(uczestnicy,navController)
+        }
 
 
-        listUczestnicy(uczestnicy,navController)
 
     }
 }
@@ -63,8 +66,10 @@ fun listUczestnicy(uczestnicy: List<Uczestnik>,navController: NavController) {
                     }
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text("Imię: ${uczestnik.imie}")
-                    Text("Nazwisko: ${uczestnik.nazwisko}")
+                    Text("${uczestnik.imie} ${uczestnik.nazwisko}",
+                        fontWeight = FontWeight.W400,
+                        fontSize = 26.sp
+                        )
                     Text("ID: ${uczestnik.id}")
                 }
             }

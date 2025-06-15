@@ -81,5 +81,8 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
 
+    //lazyVerticalGrid
+
+    implementation("androidx.compose.material3:material3:1.2.1")
 
 }
