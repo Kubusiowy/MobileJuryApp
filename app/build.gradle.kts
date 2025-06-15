@@ -85,4 +85,12 @@ dependencies {
 
     implementation("androidx.compose.material3:material3:1.2.1")
 
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+// Coroutines (jeśli jeszcze nie masz)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+
 }

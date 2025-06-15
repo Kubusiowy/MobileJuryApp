@@ -1,5 +1,6 @@
 package com.example.jurymobileapp.screens
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +34,9 @@ import androidx.navigation.NavController
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.jurymobileapp.StorageOperations.StorageOperations
 import com.example.jurymobileapp.data.GetDaneViewModel
 
 import com.example.jurymobileapp.data.Screens
@@ -46,7 +49,26 @@ fun logowanieJurora(navController: NavController, viewModel: GetDaneViewModel)
 
     var imie by remember { mutableStateOf("") }
     var nazwisko by remember { mutableStateOf("") }
+
     val context = LocalContext.current
+    val storage = remember { StorageOperations(context) }
+
+    val juror = viewModel.zalogowanyJuror
+
+    LaunchedEffect(true) {
+        val savedId = storage.getJurorId()
+        Log.d("auth", "Odczytany juror ID = $savedId")
+
+        if (savedId != null && viewModel.jurorzy.isNotEmpty()) {
+            val juror = viewModel.jurorzy.find { it.id == savedId }
+            if (juror != null) {
+                viewModel.zaloguj(juror,storage)
+                navController.navigate(Screens.WyborKategori.route) {
+                    popUpTo(Screens.LogowanieJury.route) { inclusive = true }
+                }
+            }
+        }
+    }
 
     Column(modifier = Modifier.background(Color.White).fillMaxSize().padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -113,7 +135,7 @@ fun logowanieJurora(navController: NavController, viewModel: GetDaneViewModel)
 
             if(zalogowanyJuror != null){
                 println("✅ Zalogowano: ${zalogowanyJuror.imie} ${zalogowanyJuror.nazwisko}")
-                viewModel.zaloguj(zalogowanyJuror)
+                viewModel.zaloguj(zalogowanyJuror,storage)
                 Toast.makeText(context, "Zalogowano pomyślnie", Toast.LENGTH_SHORT).show()
                 navController.navigate(Screens.WyborKategori.route) {
                     popUpTo(Screens.LogowanieJury.route) {

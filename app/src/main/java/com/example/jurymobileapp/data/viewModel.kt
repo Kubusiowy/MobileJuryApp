@@ -1,11 +1,14 @@
 package com.example.jurymobileapp.data
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.jurymobileapp.StorageOperations.StorageOperations
 import com.example.jurymobileapp.api.RetrofitClient
 import com.example.jurymobileapp.model.Juror
 import com.example.jurymobileapp.model.Kategoria
@@ -26,8 +29,12 @@ class GetDaneViewModel: ViewModel(){
     var zalogowanyJuror by mutableStateOf<Juror?>(null)
         private set
 
-    fun zaloguj(juror: Juror) {
+    fun zaloguj(juror: Juror,storage: StorageOperations) {
         zalogowanyJuror = juror
+        viewModelScope.launch {
+            storage.saveJurorId(juror.id)
+            Log.d("storage","udało sie zapisać id jurora: ${juror.imie} ${juror.nazwisko}, id: ${juror.id}")
+        }
     }
 
     init{

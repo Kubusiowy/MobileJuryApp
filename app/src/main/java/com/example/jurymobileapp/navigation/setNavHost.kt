@@ -1,6 +1,8 @@
 package com.example.jurymobileapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -9,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.jurymobileapp.StorageOperations.StorageOperations
 import com.example.jurymobileapp.data.GetDaneViewModel
 import com.example.jurymobileapp.data.Screens.WyborUczestnikow
 import com.example.jurymobileapp.model.Ocena
@@ -23,6 +26,7 @@ import com.example.jurymobileapp.screens.wyborKategorii
 fun setNavHosts(navHostController:NavHostController)
 {
     val getDaneViewModel: GetDaneViewModel =viewModel()
+
     NavHost(navController = navHostController,startDestination = Screens.LogowanieJury.route)
     {
         composable(route = Screens.LogowanieJury.route)
