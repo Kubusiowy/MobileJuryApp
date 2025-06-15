@@ -52,7 +52,7 @@ fun wyborKategorii(navController: NavController,viewModel: GetDaneViewModel) {
 
     Column(modifier = Modifier.fillMaxSize())
     {
-        Row(modifier = Modifier.fillMaxWidth().background(Color.LightGray).padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 14.dp),
+        Row(modifier = Modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
             )

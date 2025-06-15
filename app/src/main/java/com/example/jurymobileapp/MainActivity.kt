@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         controller.isAppearanceLightStatusBars = true
 
         // Kolor tła status bara – biały
-        window.statusBarColor = Color.RED
+        window.statusBarColor = Color.TRANSPARENT
         setContent {
         val navController = rememberNavController()
             setNavHosts(navController)

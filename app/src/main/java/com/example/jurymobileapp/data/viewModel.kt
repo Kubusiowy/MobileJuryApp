@@ -12,6 +12,7 @@ import com.example.jurymobileapp.StorageOperations.StorageOperations
 import com.example.jurymobileapp.api.RetrofitClient
 import com.example.jurymobileapp.model.Juror
 import com.example.jurymobileapp.model.Kategoria
+import com.example.jurymobileapp.model.Kryterium
 import com.example.jurymobileapp.model.Uczestnik
 import kotlinx.coroutines.launch
 import kotlin.toString
@@ -24,10 +25,16 @@ class GetDaneViewModel: ViewModel(){
     var kategorie by mutableStateOf<List<Kategoria>>(emptyList())
         private set
 
+    var kryteria by mutableStateOf<List<Kryterium>>(emptyList())
+    private set
+
+
     var uczestnicy by mutableStateOf<List<Uczestnik>>(emptyList())
 
     var zalogowanyJuror by mutableStateOf<Juror?>(null)
         private set
+
+
 
     fun zaloguj(juror: Juror,storage: StorageOperations) {
         zalogowanyJuror = juror
@@ -41,6 +48,7 @@ class GetDaneViewModel: ViewModel(){
         fetchJurorzy()
         fetchKategorie()
         fetchUczestnicy()
+        fetchKryteria()
     }
 
     private fun fetchJurorzy(){
@@ -82,6 +90,22 @@ class GetDaneViewModel: ViewModel(){
             }catch(e: Exception){
                 println("Błąd pobierania uczestnikow: ${e.message}")
                 Log.d("api","nie udało się pobrać uczestnikow ${e.message}")
+            }
+        }
+    }
+
+    private fun fetchKryteria()
+    {
+
+        viewModelScope.launch {
+            try {
+               kryteria  = RetrofitClient.api.getKryteria()
+                Log.d("api","udało się pobrac kryteria ${kryteria}")
+
+
+            }catch(e: Exception){
+                println("Błąd pobierania kryteriow: ${e.message}")
+                Log.d("api","nie udało się pobrać krteriow ${e.message}")
             }
         }
     }

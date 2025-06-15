@@ -21,6 +21,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.jurymobileapp.data.Screens
+import com.example.jurymobileapp.model.Ocena
 import com.example.jurymobileapp.model.Uczestnik
 
 
@@ -33,7 +35,7 @@ fun WyborUczestnika(navController: NavController, viewModel: GetDaneViewModel,ju
 
     Column(modifier = Modifier.fillMaxSize())
     {
-        Row(modifier = Modifier.fillMaxWidth().background(Color.LightGray).padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 14.dp),
+        Row(modifier = Modifier.fillMaxWidth().background(Color.Transparent).padding(start = 14.dp, end = 14.dp, top = 20.dp, bottom = 14.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         )
@@ -44,7 +46,7 @@ fun WyborUczestnika(navController: NavController, viewModel: GetDaneViewModel,ju
         }
         Column(Modifier.fillMaxSize().padding(top = 0.dp, start = 25.dp, end = 25.dp))
         {
-            listUczestnicy(uczestnicy,navController)
+            listUczestnicy(uczestnicy,navController, jurorId,kategoriaId)
         }
 
 
@@ -53,7 +55,7 @@ fun WyborUczestnika(navController: NavController, viewModel: GetDaneViewModel,ju
 }
 
 @Composable
-fun listUczestnicy(uczestnicy: List<Uczestnik>,navController: NavController) {
+fun listUczestnicy(uczestnicy: List<Uczestnik>,navController: NavController, jurorId:Int,KategoriaId:Int) {
 
     LazyColumn {
         items(uczestnicy) { uczestnik ->
@@ -62,7 +64,7 @@ fun listUczestnicy(uczestnicy: List<Uczestnik>,navController: NavController) {
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
                     .clickable {
-
+                        navController.navigate(Screens.OcenaScreen.passArgs(jurorId,uczestnik.id, kategoriaId = KategoriaId))
                     }
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {

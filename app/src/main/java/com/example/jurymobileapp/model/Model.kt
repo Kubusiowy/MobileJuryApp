@@ -20,8 +20,9 @@ data class Kategoria(
 @JsonClass(generateAdapter = true)
 data class Kryterium(
     @Json(name = "id") val id: Int,
-    @Json(name = "id_kategorii") val idKategorii: Int,
-    @Json(name = "nazwa") val nazwa: String
+    @Json(name = "kategoria_id") val idKategorii: Int,
+    @Json(name = "nazwa") val nazwa: String,
+    @Json(name = "maks_punkty") val maksPunkty: Int
 )
 
 @JsonClass(generateAdapter = true)

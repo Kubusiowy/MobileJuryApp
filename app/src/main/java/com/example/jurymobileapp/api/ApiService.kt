@@ -2,6 +2,7 @@ package com.example.jurymobileapp.api
 
 import com.example.jurymobileapp.model.Juror
 import com.example.jurymobileapp.model.Kategoria
+import com.example.jurymobileapp.model.Kryterium
 import com.example.jurymobileapp.model.Uczestnik
 import retrofit2.http.GET
 
@@ -14,4 +15,7 @@ interface ApiService {
 
     @GET("konkurs_api/uczestnicy.php")
     suspend fun getUczestnicy():List<Uczestnik>
+
+    @GET("konkurs_api/kryteria.php")
+    suspend fun getKryteria():List<Kryterium>
 }

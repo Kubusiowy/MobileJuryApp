@@ -67,7 +67,7 @@ fun setNavHosts(navHostController:NavHostController)
             val uczestnik = getDaneViewModel.uczestnicy.find { it.id == uczestnikId }
             val kategoria = getDaneViewModel.kategorie.find { it.id == kategoriaId }
 
-
+            OcenaScreen(navHostController, uczestnikId, jurorId, kategoriaId, getDaneViewModel)
 
         }
 
