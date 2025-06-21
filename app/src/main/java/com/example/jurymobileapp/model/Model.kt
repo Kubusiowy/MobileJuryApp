@@ -34,10 +34,10 @@ data class Uczestnik(
 
 
 @JsonClass(generateAdapter = true)
-data class Ocena(
-    @Json(name = "id") val id: Int,
-    @Json(name = "id_jurora") val idJurora: Int,
-    @Json(name = "id_uczestnika") val idUczestnika: Int,
-    @Json(name = "id_kryterium") val idKryterium: Int,
-    @Json(name = "punkty") val punkty: Int
+data class OcenaRequest(
+    @Json(name = "jury_id") val juryId: Int,
+    @Json(name = "uczestnik_id") val uczestnikId: Int,
+    @Json(name = "kryterium_id") val kryteriumId: Int,
+    @Json(name = "wartosc") val wartosc: Int
 )
+

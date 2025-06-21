@@ -13,6 +13,7 @@ import com.example.jurymobileapp.api.RetrofitClient
 import com.example.jurymobileapp.model.Juror
 import com.example.jurymobileapp.model.Kategoria
 import com.example.jurymobileapp.model.Kryterium
+import com.example.jurymobileapp.model.OcenaRequest
 import com.example.jurymobileapp.model.Uczestnik
 import kotlinx.coroutines.launch
 import kotlin.toString
@@ -106,6 +107,40 @@ class GetDaneViewModel: ViewModel(){
             }catch(e: Exception){
                 println("Błąd pobierania kryteriow: ${e.message}")
                 Log.d("api","nie udało się pobrać krteriow ${e.message}")
+            }
+        }
+    }
+
+}
+
+
+class OcenyViewModel : ViewModel() {
+
+    var status by mutableStateOf<String?>(null)
+        private set
+
+    fun wyslijOcene(ocena: OcenaRequest) {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.api.dodajOcene(ocena)
+
+                if (response.isSuccessful) {
+                    val body = response.body()?.toString()
+                    if (body?.contains("\"success\":true") == true) {
+                        status = "Sukces"
+                        Log.d("Ocena", "Dodano ocenę")
+                    } else {
+                        status = "Błąd serwera: $body"
+                        Log.e("Ocena", status!!)
+                    }
+                } else {
+                    status = "Błąd HTTP: ${response.code()}"
+                    Log.e("Ocena", status!!)
+                }
+
+            } catch (e: Exception) {
+                status = "Wyjątek: ${e.message}"
+                Log.e("Ocena", status!!)
             }
         }
     }

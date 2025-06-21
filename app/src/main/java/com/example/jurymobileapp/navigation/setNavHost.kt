@@ -13,8 +13,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.jurymobileapp.StorageOperations.StorageOperations
 import com.example.jurymobileapp.data.GetDaneViewModel
+import com.example.jurymobileapp.data.OcenyViewModel
 import com.example.jurymobileapp.data.Screens.WyborUczestnikow
-import com.example.jurymobileapp.model.Ocena
 import com.example.jurymobileapp.screens.Error.ErrorScreen
 import com.example.jurymobileapp.screens.OcenaScreen
 import com.example.jurymobileapp.screens.WyborUczestnika
@@ -26,7 +26,7 @@ import com.example.jurymobileapp.screens.wyborKategorii
 fun setNavHosts(navHostController:NavHostController)
 {
     val getDaneViewModel: GetDaneViewModel =viewModel()
-
+    val OcenyViewModel: OcenyViewModel = viewModel ()
     NavHost(navController = navHostController,startDestination = Screens.LogowanieJury.route)
     {
         composable(route = Screens.LogowanieJury.route)
@@ -67,7 +67,7 @@ fun setNavHosts(navHostController:NavHostController)
             val uczestnik = getDaneViewModel.uczestnicy.find { it.id == uczestnikId }
             val kategoria = getDaneViewModel.kategorie.find { it.id == kategoriaId }
 
-            OcenaScreen(navHostController, uczestnikId, jurorId, kategoriaId, getDaneViewModel)
+            OcenaScreen(navHostController, uczestnikId, jurorId, kategoriaId, getDaneViewModel,OcenyViewModel)
 
         }
 
