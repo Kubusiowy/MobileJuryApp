@@ -27,3 +27,6 @@ Aplikacja mobilna stworzona w **Jetpack Compose** z wykorzystaniem **Kotlin**, p
 2. W pliku `RetrofitClient.kt` ustaw odpowiedni adres IP / URL do API
 3. Uruchom aplikację w Android Studio
 4. Upewnij się że posiadasz dobrze zbudowaną baze **SQl**
+5. Sklonuj repozytorium:
+   ```bash
+   https://github.com/Kubusiowy/MobileJuryApp
